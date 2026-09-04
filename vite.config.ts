@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
   return {
-    base: './',
+    base: '/portfolio/',
     plugins: [react(), tailwindcss(), contactApiPlugin(env)],
     resolve: {
       alias: {
