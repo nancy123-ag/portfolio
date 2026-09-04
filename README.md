@@ -12,3 +12,12 @@ npm run dev
 ```
 
 Production base path is `/portfolio/` for GitHub Pages at `https://nancy123-ag.github.io/portfolio/`.
+
+## Deploy to GitHub Pages
+
+```bash
+gh auth login
+gh repo create portfolio --public --source=. --remote=origin --push
+```
+
+Then on GitHub: **Settings → Pages → Source: GitHub Actions**. The workflow in `.github/workflows/deploy.yml` publishes on every push to `main`.
