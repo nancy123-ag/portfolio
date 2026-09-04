@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Production base path is `/portfolio/` for GitHub Pages at `https://nancy123-ag.github.io/portfolio/`.
+Production base path is `/Portfolio/` for GitHub Pages at `https://nancy123-ag.github.io/Portfolio/`.
 
 ## Deploy to GitHub Pages
 
