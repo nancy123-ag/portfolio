@@ -1,108 +1,97 @@
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowDownRight, Download, Mail } from 'lucide-react'
 import { motion } from 'motion/react'
 
-import { MagneticButton } from '@/components/magnetic-button'
-import { BlurFade } from '@/components/ui/blur-fade'
-import { NumberTicker } from '@/components/ui/number-ticker'
-import { Particles } from '@/components/ui/particles'
-import { TextAnimate } from '@/components/ui/text-animate'
-import { profile, stats } from '@/data/site'
+import { profile, socials, stats } from '@/data/site'
+import { useTypewriter } from '@/hooks/use-typewriter'
 
 export function Hero() {
+  const typed = useTypewriter(profile.typing)
+
   return (
-    <section id="top" className="relative isolate overflow-hidden pt-28 md:pt-36">
-      <Particles
-        className="absolute inset-0"
-        quantity={90}
-        ease={70}
-        color="#d4b483"
-        size={0.45}
-      />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[70vh] bg-[radial-gradient(ellipse_at_top,rgba(212,180,131,0.12),transparent_55%)]" />
-
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-5 pb-16 md:grid-cols-[1.15fr_0.85fr] md:px-8 md:pb-24">
-        <div>
-          <BlurFade delay={0.05} inView>
-            <p className="mb-6 text-[11px] uppercase tracking-[0.34em] text-accent">
-              {profile.role} · {profile.location}
-            </p>
-          </BlurFade>
-
-          <h1 className="font-serif text-[clamp(2.6rem,7vw,5.6rem)] leading-[0.95] tracking-tight text-foreground">
-            <TextAnimate animation="blurInUp" by="word" as="span" once>
-              {profile.headlineLead}
-            </TextAnimate>
-            <span className="mt-2 block italic text-accent">
-              <TextAnimate animation="blurInUp" by="word" delay={0.25} as="span" once>
-                {profile.headlineEmphasis}
-              </TextAnimate>
+    <section id="top" className="relative overflow-hidden px-4 pb-16 pt-10 sm:px-6 sm:pt-16">
+      <div className="pointer-events-none absolute inset-0 grid-fade" />
+      <div className="relative mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55 }}
+        >
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-line bg-white/70 px-3 py-1 text-xs uppercase tracking-[0.22em] text-muted dark:bg-slate-900/60">
+            {profile.location}
+          </p>
+          <h1 className="font-display text-4xl leading-[1.05] tracking-tight sm:text-6xl">
+            Hi, I’m {profile.name}.
+            <span className="mt-3 block min-h-[1.3em] text-indigo-600 dark:text-indigo-300">
+              {profile.headline}{' '}
+              <span className="underline decoration-cyan-400 decoration-4 underline-offset-8">
+                {typed}
+              </span>
+              <span className="ml-0.5 inline-block h-[1em] w-[3px] translate-y-1 animate-pulse bg-indigo-500" />
             </span>
           </h1>
-
-          <BlurFade delay={0.35} inView>
-            <p className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-              {profile.summary}
-            </p>
-          </BlurFade>
-
-          <BlurFade delay={0.45} inView>
-            <div className="mt-10 flex flex-wrap items-center gap-3">
-              <MagneticButton
-                href="#work"
-                className="bg-foreground text-background hover:bg-accent hover:text-accent-foreground"
-              >
-                Explore my work
-                <ArrowUpRight size={16} />
-              </MagneticButton>
-              <MagneticButton
-                href={profile.github}
-                className="border border-border bg-transparent text-foreground hover:border-accent"
-              >
-                GitHub
-                <ArrowUpRight size={16} />
-              </MagneticButton>
-            </div>
-          </BlurFade>
-        </div>
+          <p className="mt-6 max-w-xl text-sm text-muted sm:text-base">
+            B.Tech IT at Banasthali Vidyapith · 9.36 CGPA · interned at MITS, shipping AI products and
+            web interfaces.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a
+              href={profile.resumeHref}
+              download
+              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white dark:bg-white dark:text-slate-950"
+            >
+              <Download size={16} /> Resume
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full border border-line bg-white/70 px-5 py-3 text-sm font-medium dark:bg-slate-900/70"
+            >
+              <Mail size={16} /> Contact me
+            </a>
+            <a
+              href="#projects"
+              className="inline-flex items-center gap-2 px-2 py-3 text-sm text-muted"
+            >
+              See work <ArrowDownRight size={16} />
+            </a>
+          </div>
+        </motion.div>
 
         <motion.aside
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.7 }}
-          className="relative self-end overflow-hidden rounded-[28px] border border-border bg-card/80 p-6 backdrop-blur-md"
+          transition={{ delay: 0.15, duration: 0.55 }}
+          className="glass grid gap-4 rounded-[28px] p-5 sm:p-6"
         >
-          <div className="mb-6 flex items-center gap-4">
-            <img
-              src={profile.avatar}
-              alt={profile.name}
-              className="size-16 rounded-2xl object-cover ring-1 ring-border"
-            />
+          <div className="flex items-center gap-3">
+            <div className="grid size-14 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500 to-cyan-400 text-lg font-semibold text-white">
+              {profile.initials}
+            </div>
             <div>
-              <p className="text-sm text-muted-foreground">Currently building</p>
-              <p className="font-medium">AI products with a product-design lens</p>
+              <p className="text-sm text-muted">Now</p>
+              <p className="font-medium">{profile.role}</p>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 gap-3">
             {stats.map((item) => (
-              <div key={item.label} className="rounded-2xl border border-border bg-background/50 p-3">
-                <p className="font-serif text-2xl text-foreground">
-                  {item.value === '15+' ? (
-                    <>
-                      <NumberTicker value={15} />+
-                    </>
-                  ) : item.value === '6' ? (
-                    <NumberTicker value={6} />
-                  ) : (
-                    item.value
-                  )}
-                </p>
-                <p className="mt-1 text-[11px] leading-snug text-muted-foreground">{item.label}</p>
+              <div key={item.label} className="rounded-2xl border border-line bg-white/50 p-3 dark:bg-slate-950/40">
+                <p className="font-display text-xl">{item.value}</p>
+                <p className="text-xs text-muted">{item.label}</p>
               </div>
             ))}
           </div>
-          <p className="mt-6 text-xs uppercase tracking-[0.24em] text-muted-foreground">
-            Architecture · Craft · Impact
-          </p>
+          <div className="flex flex-wrap gap-2">
+            {socials.map((item) => (
+              <a
+                key={item.id}
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-line px-3 py-1.5 text-xs hover:border-indigo-400"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
         </motion.aside>
       </div>
     </section>

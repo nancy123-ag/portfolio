@@ -1,23 +1,20 @@
 # Nancy Agarwal — Portfolio
 
-React portfolio inspired by [Shikher Singhal’s site](https://shikhersinghal.github.io/?view=advocate), built for [Nancy Agarwal](https://github.com/nancy123-ag).
+Local React portfolio (Vite + Tailwind + Motion). **Do not deploy until the UI is approved.**
 
-**Stack:** Vite, React, TypeScript, Tailwind CSS, Motion (Framer Motion), shadcn/ui + [Magic UI](https://magicui.design) via the shadcn CLI (`21st.dev` registry workflow).
-
-## Local
+## Run
 
 ```bash
 npm install
 npm run dev
 ```
 
-Production base path is `/Portfolio/` for GitHub Pages at `https://nancy123-ag.github.io/Portfolio/`.
+Open [http://localhost:5173](http://localhost:5173).
 
-## Deploy to GitHub Pages
+## Contact form
 
-```bash
-gh auth login
-gh repo create portfolio --public --source=. --remote=origin --push
-```
+Submissions are stored in `data/messages.json` (local database).
 
-Then on GitHub: **Settings → Pages → Source: GitHub Actions**. The workflow in `.github/workflows/deploy.yml` publishes on every push to `main`.
+Email notification uses [Web3Forms](https://web3forms.com) if `WEB3FORMS_ACCESS_KEY` is set in `.env`, otherwise [FormSubmit](https://formsubmit.co) to `nancyagarwal9023@gmail.com` (confirm the first email).
+
+Optional [Supabase](https://supabase.com): run `supabase/schema.sql`, then set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.

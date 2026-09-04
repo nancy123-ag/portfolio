@@ -4,70 +4,34 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --color-ink: var(--ink);
   --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-border: var(--border);
+  --color-line: var(--line);
+  --color-glass: var(--glass);
   --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-card: var(--card);
-  --color-primary: var(--accent);
-  --color-primary-foreground: var(--accent-foreground);
-  --color-ring: var(--accent);
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
-  --animate-marquee: marquee var(--duration) infinite linear;
-  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
-  @keyframes marquee {
-  from {
-    transform: translateX(0);
-    }
-  to {
-    transform: translateX(calc(-100% - var(--gap)));
-    }
-  }
-  @keyframes marquee-vertical {
-  from {
-    transform: translateY(0);
-    }
-  to {
-    transform: translateY(calc(-100% - var(--gap)));
-    }
-  }
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-100% - var(--gap)));
-  }
-}
-
-@keyframes marquee-vertical {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(calc(-100% - var(--gap)));
-  }
+  --color-accent-2: var(--accent-2);
 }
 
 :root {
-  --background: #07080c;
-  --foreground: #f3eee4;
-  --muted: #14161e;
-  --muted-foreground: #9a9388;
-  --border: rgba(243, 238, 228, 0.12);
-  --accent: #d4b483;
-  --accent-foreground: #0b0c10;
-  --card: #0e1016;
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: rgba(15, 23, 42, 0.1);
+  --glass: rgba(255, 255, 255, 0.62);
+  --accent: #4f46e5;
+  --accent-2: #0891b2;
+  color-scheme: light;
 }
 
-* {
-  box-sizing: border-box;
+.dark {
+  --ink: #e8eefc;
+  --muted: #9aa8c3;
+  --line: rgba(232, 238, 252, 0.12);
+  --glass: rgba(15, 23, 42, 0.55);
+  --accent: #818cf8;
+  --accent-2: #22d3ee;
+  color-scheme: dark;
 }
 
 html {
@@ -77,28 +41,50 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--background);
-  color: var(--foreground);
   font-family: var(--font-sans);
+  color: var(--ink);
+  background:
+    radial-gradient(900px 480px at 8% -10%, rgba(79, 70, 229, 0.18), transparent 55%),
+    radial-gradient(700px 420px at 100% 8%, rgba(8, 145, 178, 0.16), transparent 50%),
+    radial-gradient(600px 380px at 70% 100%, rgba(244, 63, 94, 0.08), transparent 45%),
+    #f5f7fb;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
-::selection {
-  background: color-mix(in srgb, var(--accent) 40%, transparent);
-  color: var(--foreground);
+.dark body,
+.dark {
+  background:
+    radial-gradient(900px 480px at 8% -10%, rgba(129, 140, 248, 0.2), transparent 55%),
+    radial-gradient(700px 420px at 100% 8%, rgba(34, 211, 238, 0.12), transparent 50%),
+    #070b16;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 #root {
   min-height: 100vh;
 }
 
-.grain {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  opacity: 0.09;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 50px -28px rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(18px);
+}
+
+.grid-fade {
+  background-image:
+    linear-gradient(to right, rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+.dark .grid-fade {
+  background-image:
+    linear-gradient(to right, rgba(232, 238, 252, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(232, 238, 252, 0.06) 1px, transparent 1px);
 }
